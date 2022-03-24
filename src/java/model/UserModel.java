@@ -10,6 +10,7 @@ package model;
  * @author A
  */
 public class UserModel {
+     private int id;
     private String name;
     private String mobile;
     private String email;
@@ -36,6 +37,14 @@ public class UserModel {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
     
             
