@@ -37,10 +37,15 @@ public class UserDao {
             if (i > 0) {
                 outModel.setResponseCode("1");
                 outModel.setResponseMessage("Data Save Successfully");
+            } else {
+                outModel.setResponseCode("0");
+                outModel.setResponseMessage("Fail to save Data");
             }
 
         } catch (SQLException ex) {
             Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);
+            outModel.setResponseCode("0");
+            outModel.setResponseMessage(ex.getMessage());
         }
 
         return outModel;
@@ -82,7 +87,7 @@ public class UserDao {
         try {
             PreparedStatement ps = con.prepareCall(sql);
             ps.setInt(1, id);
-            rValue  = ps.executeUpdate();
+            rValue = ps.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);
         }
