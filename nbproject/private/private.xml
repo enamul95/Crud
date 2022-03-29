@@ -5,9 +5,12 @@
         <group>
             <file>file:/E:/Workspace/J2EE/Crud/web/index.jsp</file>
             <file>file:/E:/Workspace/J2EE/Crud/src/java/dbConnection/ConnectionHandler.java</file>
+            <file>file:/E:/Workspace/J2EE/Crud/src/java/api/DeleteApi.java</file>
             <file>file:/E:/Workspace/J2EE/Crud/src/java/model/ResponseModel.java</file>
             <file>file:/E:/Workspace/J2EE/Crud/src/java/model/UserModel.java</file>
+            <file>file:/E:/Workspace/J2EE/Crud/src/java/api/UserRestApi.java</file>
             <file>file:/E:/Workspace/J2EE/Crud/src/java/dao/UserDao.java</file>
+            <file>file:/E:/Workspace/J2EE/Crud/src/java/api/UserApi.java</file>
         </group>
     </open-files>
 </project-private>

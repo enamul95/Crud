@@ -46,6 +46,10 @@ public class UserDao {
             Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);
             outModel.setResponseCode("0");
             outModel.setResponseMessage(ex.getMessage());
+        } finally {
+            if (con != null) {
+                ConnectionHandler.releaseConnection(con);
+            }
         }
 
         return outModel;
@@ -74,6 +78,10 @@ public class UserDao {
 
         } catch (SQLException ex) {
             Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (con != null) {
+                ConnectionHandler.releaseConnection(con);
+            }
         }
 
         return list;
@@ -90,6 +98,10 @@ public class UserDao {
             rValue = ps.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (con != null) {
+                ConnectionHandler.releaseConnection(con);
+            }
         }
         return rValue;
     }
