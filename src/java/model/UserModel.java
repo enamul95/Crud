@@ -5,6 +5,8 @@
  */
 package model;
 
+import javax.servlet.http.Part;
+
 /**
  *
  * @author A
@@ -14,6 +16,7 @@ public class UserModel {
     private String name;
     private String mobile;
     private String email;
+      private Part image = null;
 
     public String getName() {
         return name;
@@ -45,6 +48,14 @@ public class UserModel {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public Part getImage() {
+        return image;
+    }
+
+    public void setImage(Part image) {
+        this.image = image;
     }
     
             

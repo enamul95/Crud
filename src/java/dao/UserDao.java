@@ -6,6 +6,9 @@
 package dao;
 
 import dbConnection.ConnectionHandler;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -23,16 +26,20 @@ import model.UserModel;
  */
 public class UserDao {
 
-    public ResponseModel insertData(UserModel model) {
+    public ResponseModel insertData(UserModel model) throws IOException {
         ResponseModel outModel = new ResponseModel();
-        String sql = "INSERT INTO user (name, mobile, email) VALUES (?, ?, ?) ";
+        String sql = "INSERT INTO user (name, mobile, email,image) VALUES (?, ?, ?,?) ";
         Connection con = ConnectionHandler.getConnection();
+        
 
         try {
+              byte[] photo = convertoBytesArray(model.getImage().getInputStream());
+              
             PreparedStatement ps = con.prepareCall(sql);
             ps.setString(1, model.getName());
             ps.setString(2, model.getMobile());
             ps.setString(3, model.getEmail());
+            ps.setBytes(4, photo);
             int i = ps.executeUpdate();
             if (i > 0) {
                 outModel.setResponseCode("1");
@@ -105,8 +112,27 @@ public class UserDao {
         }
         return rValue;
     }
+    
+     public static byte[] convertoBytesArray(InputStream in) throws IOException {
+        ByteArrayOutputStream os = null;
+        if (in != null) {
+            os = new ByteArrayOutputStream();
 
-    public static void main(String[] args) {
+            byte[] buffer = new byte[1024];
+            int len;
+
+            // read bytes from the input stream and store them in buffer
+            while ((len = in.read(buffer)) != -1) {
+                // write bytes from the buffer into output stream
+                os.write(buffer, 0, len);
+            }
+        }
+
+        return os.toByteArray();
+    }
+    
+
+    public static void main(String[] args) throws IOException {
         UserDao ud = new UserDao();
         UserModel model = new UserModel();
         model.setName("Test");

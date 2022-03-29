@@ -9,10 +9,12 @@ import dao.UserDao;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 import model.UserModel;
 
 /**
@@ -20,6 +22,11 @@ import model.UserModel;
  * @author A
  */
 @WebServlet(name = "UserApi", urlPatterns = {"/user-api"})
+@MultipartConfig(
+        fileSizeThreshold = 1024 * 1024 * 1, // 1 MB
+        maxFileSize = 1024 * 1024 * 10, // 10 MB
+        maxRequestSize = 1024 * 1024 * 100 // 100 MB
+)
 public class UserApi extends HttpServlet {
 
     /**
@@ -39,7 +46,7 @@ public class UserApi extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet UserApi</title>");            
+            out.println("<title>Servlet UserApi</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet UserApi at " + request.getContextPath() + "</h1>");
@@ -60,7 +67,7 @@ public class UserApi extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       
+
     }
 
     /**
@@ -74,23 +81,29 @@ public class UserApi extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-       
+
         String name = request.getParameter("name");
-        System.out.println("name = " + name); 
+        System.out.println("name = " + name);
         String mobile = request.getParameter("mobile");
         System.out.println("mobile = " + mobile);
         String email11 = request.getParameter("email");
         System.out.println("email11 = " + email11);
-        
+
+        Part filePart = request.getPart("file");
+        System.out.println("filePart = " + filePart);
+      //  String fileName = filePart.getSubmittedFileName();
+      //  System.out.println("fileName = " + fileName);
+
         UserDao dao = new UserDao();
         UserModel model = new UserModel();
         model.setName(name);
         model.setMobile(mobile);
         model.setEmail(email11);
+        model.setImage(filePart);
         dao.insertData(model);
-        response.sendRedirect(request.getContextPath()+"/index.jsp");
         
+        response.sendRedirect(request.getContextPath() + "/index.jsp");
+
     }
 
     /**

@@ -5,13 +5,18 @@
  */
 package model;
 
+import javax.servlet.http.Part;
+
 /**
  *
  * @author A
  */
 public class ResponseModel {
+
     private String responseCode;
     private String responseMessage;
+
+  
 
     public String getResponseCode() {
         return responseCode;
@@ -28,7 +33,8 @@ public class ResponseModel {
     public void setResponseMessage(String responseMessage) {
         this.responseMessage = responseMessage;
     }
+
+
     
-    
-    
+
 }

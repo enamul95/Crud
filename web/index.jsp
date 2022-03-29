@@ -27,13 +27,13 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:300i,400,700&display=swap" rel="stylesheet">
-        
+
 
     </head>
     <body>
         <div class="container mt-3">
             <h2>Add User</h2>
-            <form method="POST" action="/Crud/user-api">
+            <form method="POST" action="/Crud/user-api" enctype="multipart/form-data">
                 <div class="mb-3 mt-3">
                     <label for="name">Name:</label>
                     <input type="text" class="form-control" id="name" placeholder="Enter name" name="name">
@@ -48,6 +48,10 @@
                     <label for="email">Email:</label>
                     <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
                 </div>
+                 <div class="mb-3 mt-3">
+                    <label for="formFileLg" class="form-label">Large file input example</label>
+                    <input class="form-control form-control-lg" id="file" name="file" type="file">
+                </div>
 
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
@@ -57,7 +61,7 @@
                 <%for (UserModel model : list) {%>
                 <div class="col-lg-3 col-md-6 mt-sm-20">
                     <div class="card" >
-                        <img  src="/Crud/image-api?id=<%= model.getId() %>"  width="100" height="100">
+                        <img  src="/Crud/image-api?id=<%= model.getId()%>"  width="100" height="100">
                         <div class="card-body">
                             <h5 class="card-title"><%= model.getName()%></h5>
                             <div class="row pb-4 pt-2">
